@@ -5,7 +5,7 @@ import AdminPanel from "./pages/AdminPanel"
 import Home from "./pages/home.jsx"
 import ProductDetail from "./pages/ProductDetail"
 import Cart from "./pages/cart.jsx"
-import Checkout from "./pages/CheckOut.jsx"
+import Checkout from "./pages/checkout.jsx"
 import Productos from "./pages/Productos"
 import Success from "./pages/Success"
 
