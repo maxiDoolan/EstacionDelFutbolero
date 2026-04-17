@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState, useContext } from "react"
 import { CartContext } from "../context/CartContext"
-import "../styles/ProductDetail.css"
+import "../styles/productDetail.css"
 
 const ProductDetail = () => {
 

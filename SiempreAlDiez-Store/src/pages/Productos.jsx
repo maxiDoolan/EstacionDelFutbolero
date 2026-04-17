@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useLocation } from "react-router-dom"
 import ProductCard from "../components/ProductCard"
-import "../styles/Productos.css"
+import "../styles/productos.css"
 
 export default function Productos() {
 

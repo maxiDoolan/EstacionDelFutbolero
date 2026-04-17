@@ -1,7 +1,7 @@
 import { useEffect, useContext } from "react"
 import { CartContext } from "../context/CartContext"
 import { Link } from "react-router-dom"
-import "../styles/Success.css"
+import "../styles/success.css"
 
 const Success = () => {
 

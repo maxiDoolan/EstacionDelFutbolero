@@ -12,7 +12,7 @@ import Success from "./pages/Success"
 import Navbar from "./components/NavBar"
 import Footer from "./components/Footer"
 
-import "./App.css"
+import "./app.css"
 
 function App() {
 

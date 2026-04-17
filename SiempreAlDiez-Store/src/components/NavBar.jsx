@@ -9,7 +9,7 @@ import {
 } from "lucide-react"
 import { Link, useNavigate } from "react-router-dom"
 import { CartContext } from "../context/CartContext"
-import "../styles/NavBar.css"
+import "../styles/navBar.css"
 
 export default function Navbar() {
 

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { useContext } from "react"
 import { CartContext } from "../context/CartContext"
-import "../styles/ProductCard.css"
+import "../styles/productCard.css"
 
 const ProductCard = ({ product }) => {
 
