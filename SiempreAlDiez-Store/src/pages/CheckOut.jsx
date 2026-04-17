@@ -38,7 +38,7 @@ const handleCheckout = async () => {
     }
 
     // 🔥 1. crear orden
-    const orderRes = await fetch("http://localhost:5000/api/orders", {
+    const orderRes = await fetch("https://estaciondelfutbolero.onrender.com/api/orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -49,7 +49,7 @@ const handleCheckout = async () => {
     const order = await orderRes.json()
 
     // 🔥 2. crear pago en backend
-    const paymentRes = await fetch("http://localhost:5000/api/payment", {
+    const paymentRes = await fetch("https://estaciondelfutbolero.onrender.com/api/payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

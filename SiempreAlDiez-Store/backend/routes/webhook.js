@@ -32,13 +32,30 @@ router.post("/", async (req, res) => {
       return res.sendStatus(200)
     }
 
-    // 🔥 Descontar stock
-    for (const item of order.items) {
-      await Product.findOneAndUpdate(
-        { _id: item.productId, stock: { $gte: item.quantity } },
-        { $inc: { stock: -item.quantity } }
-      )
-    }
+   for (const item of order.items) {
+  const product = await Product.findById(item.productId)
+
+  if (!product) continue
+
+  const size = item.size
+
+  if (!product.stock || product.stock[size] === undefined) {
+    console.log("❌ Talle no encontrado:", size)
+    continue
+  }
+
+  // 🔥 restar SOLO ese talle
+  product.stock[size] -= item.quantity
+
+  // evitar negativos
+  if (product.stock[size] < 0) {
+    product.stock[size] = 0
+  }
+
+  await product.save()
+
+  console.log(`🧾 ${product.name} - ${size}: ${product.stock[size]}`)
+}
 
     // ✅ Actualizar orden
     order.status = "approved"

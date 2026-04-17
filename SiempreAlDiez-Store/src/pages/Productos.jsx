@@ -17,7 +17,7 @@ export default function Productos() {
 
         // 🔥 AHORA USA LA CATEGORÍA DE LA URL
         const response = await fetch(
-          `http://localhost:5000/api/products${location.search}`
+          `https://estaciondelfutbolero.onrender.com/api/products${location.search}`
         )
 
         const data = await response.json()

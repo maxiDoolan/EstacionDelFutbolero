@@ -16,7 +16,7 @@ const ProductDetail = () => {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/products/${id}`)
+        const response = await fetch(`https://estaciondelfutbolero.onrender.com/api/products/${id}`)
         const data = await response.json()
         setProduct(data)
         setLoading(false)

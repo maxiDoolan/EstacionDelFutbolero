@@ -20,7 +20,7 @@ const AdminPanel = () => {
   const [products, setProducts] = useState([])
   const [editingProduct, setEditingProduct] = useState(null)
 
-  const API = "http://localhost:5000/api/products"
+  const API = "https://estaciondelfutbolero.onrender.com/api/products"
 
   // =========================
   // OBTENER PRODUCTOS
