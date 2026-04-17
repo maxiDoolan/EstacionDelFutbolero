@@ -1,5 +1,6 @@
 import { useContext, useState } from "react"
 import { CartContext } from "../context/CartContext"
+
 import "../styles/checkout.css"
 const Checkout = () => {
 
