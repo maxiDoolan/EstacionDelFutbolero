@@ -1,0 +1,36 @@
+.footer {
+  background-color: #111;
+  color: white;
+  padding: 2rem 1rem;
+  text-align: center;
+  margin-top: auto;
+}
+
+.footer-top {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.footer-contact {
+  margin-bottom: 1rem;
+}
+
+.footer-social a {
+  color: #00ff88;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-social a:hover {
+  text-decoration: underline;
+}
+
+.footer-copy {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.6;
+}

@@ -1,0 +1,118 @@
+/* ================= CONTAINER ================= */
+
+.cart-container {
+  color: #111;
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 40px 20px;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.cart-container h2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: -1px;
+}
+
+/* ================= CART ITEM ================= */
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #eee;
+  padding: 25px 0;
+  gap: 20px;
+}
+
+.cart-image {
+  width: 110px;
+  height: auto;
+  object-fit: contain;
+}
+
+.cart-info {
+  flex: 1;
+}
+
+.cart-info h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.cart-info p {
+  font-size: 14px;
+  color: #555;
+  margin: 4px 0;
+}
+
+/* ================= REMOVE BUTTON ================= */
+
+.btn-remove {
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #111;
+  transition: 0.2s ease;
+}
+
+.btn-remove:hover {
+  color: #0b3d91; /* azul futbolero */
+}
+
+/* ================= SUMMARY ================= */
+
+.cart-summary {
+  margin-top: 50px;
+  text-align: right;
+}
+
+.cart-summary h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+/* ================= BUTTONS ================= */
+
+.btn-primary {
+  display: inline-block;
+  padding: 14px 28px;
+  background: #111;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: 0.3s ease;
+  margin-left: 10px;
+}
+
+.btn-primary:hover {
+  background: #0b3d91; /* azul marca */
+}
+
+.btn-clear {
+  padding: 14px 28px;
+  background: transparent;
+  border: 1px solid #111;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.btn-clear:hover {
+  background: #111;
+  color: white;
+}
+
+/* ================= EMPTY CART ================= */
+
+.cart-container h2:only-child {
+  text-align: center;
+  margin-top: 100px;
+}

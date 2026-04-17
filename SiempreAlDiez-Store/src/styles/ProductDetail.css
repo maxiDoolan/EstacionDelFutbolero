@@ -1,0 +1,91 @@
+.product-detail {
+  color: #000000;
+  padding: 40px;
+}
+
+.detail-container {
+  display: flex;
+  gap: 40px;
+  align-items: flex-start;
+}
+
+.detail-image img {
+  width: 400px;
+  border-radius: 10px;
+}
+
+.detail-info {
+  max-width: 400px;
+}
+
+.detail-description {
+  margin: 15px 0;
+  color: #000000;
+}
+
+.detail-price {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* 🔥 TALLES */
+
+.size-selector {
+  margin: 20px 0;
+}
+
+.size-selector p {
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.sizes-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.size-btn {
+  padding: 10px 15px;
+  border: 2px solid #ddd;
+  background: white;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+}
+
+.size-btn:hover {
+  border-color: black;
+}
+
+.size-btn.active {
+  background: black;
+  color: white;
+  border-color: black;
+}
+
+.size-btn:disabled {
+  background: #eee;
+  color: #999;
+  cursor: not-allowed;
+  border-color: #ddd;
+}
+
+/* 🔥 BOTÓN */
+
+.detail-button {
+  margin-top: 20px;
+  padding: 12px 20px;
+  background: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  border-radius: 8px;
+  transition: 0.2s;
+}
+
+.detail-button:hover {
+  background: #333;
+}

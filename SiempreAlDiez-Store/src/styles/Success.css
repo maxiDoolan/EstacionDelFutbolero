@@ -1,0 +1,33 @@
+.success-container {
+    color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.success-card {
+  background: white;
+  padding: 40px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.success-card h1 {
+  color: #0a7cff;
+  margin-bottom: 10px;
+}
+
+.success-info {
+  margin: 20px 0;
+  color: #555;
+}
+
+.btn-home {
+  background: black;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+}

@@ -1,0 +1,187 @@
+/* ============================= */
+/* CONTENEDOR GENERAL LOGIN */
+/* ============================= */
+
+.login-container {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #000000, #1e1e1e);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #1a9b41;
+  font-size: 28px;
+}
+
+/* ============================= */
+/* FORM LOGIN */
+/* ============================= */
+
+.login-container form {
+  background: #1a1a1a;
+  padding: 40px;
+  border-radius: 12px;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+}
+
+.login-container input {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: #fff;
+  font-size: 14px;
+  transition: 0.3s ease;
+}
+
+.login-container input:focus {
+  outline: none;
+  border-color: #00ff88;
+  box-shadow: 0 0 8px #00ff88;
+}
+
+.login-container button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #00ff88;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.login-container button:hover {
+  background: #00cc6a;
+  transform: translateY(-2px);
+}
+
+/* ============================= */
+/* ADMIN PANEL */
+/* ============================= */
+
+.admin-container {
+  min-height: 80vh;
+  padding: 40px;
+  background: #121212;
+  color: white;
+}
+
+.admin-container h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #00ff88;
+  padding-bottom: 10px;
+}
+
+/* ============================= */
+/* FORM PRODUCTO ADMIN */
+/* ============================= */
+
+.admin-form {
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.admin-form input,
+.admin-form textarea {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: white;
+  font-size: 14px;
+}
+
+.admin-form textarea {
+  resize: none;
+  height: 100px;
+}
+
+.admin-form input:focus,
+.admin-form textarea:focus {
+  outline: none;
+  border-color: #00ff88;
+  box-shadow: 0 0 8px #00ff88;
+}
+
+.admin-form button {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #00ff88;
+  color: #111;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.admin-form button:hover {
+  background: #00cc6a;
+  transform: translateY(-2px);
+}
+
+.admin-products{
+margin-top:40px;
+}
+
+.admin-product{
+display:flex;
+align-items:center;
+justify-content:space-between;
+background:#1a1a1a;
+padding:15px;
+margin-bottom:15px;
+border-radius:6px;
+}
+
+.admin-product img{
+width:60px;
+height:60px;
+object-fit:cover;
+border-radius:4px;
+}
+
+.admin-actions{
+display:flex;
+gap:10px;
+}
+
+.admin-actions button{
+background:#926b38;
+border:none;
+color:white;
+padding:8px 14px;
+cursor:pointer;
+border-radius:4px;
+}
+
+.admin-actions button:hover{
+background:#b8894c;
+}
+/* ============================= */
+/* RESPONSIVE */
+/* ============================= */
+
+@media (max-width: 768px) {
+  .login-container form {
+    width: 90%;
+  }
+
+  .admin-form {
+    width: 100%;
+  }
+}
