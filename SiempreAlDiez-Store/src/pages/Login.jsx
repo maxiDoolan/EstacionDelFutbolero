@@ -22,7 +22,7 @@ const Login = () => {
     e.preventDefault()
 
     try {
-      const res = await fetch("http://localhost:5000/api/auth/login", {
+      const res = await fetch("/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -41,14 +41,14 @@ const Login = () => {
       localStorage.setItem("token", data.token)
       localStorage.setItem("isAdmin", data.isAdmin)
 
-      alert("Login exitoso 🔥")
+    
 
       // Si es admin → panel
-      if (data.isAdmin) {
-        navigate("/admin")
-      } else {
-        navigate("/")
-      }
+         if (data.isAdmin) {
+         navigate("/admin")
+        } else {
+          navigate("/")
+        }
 
     } catch (error) {
       alert("Error al iniciar sesión")

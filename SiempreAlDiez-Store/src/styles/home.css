@@ -7,43 +7,48 @@
 
 .hero {
   height: 80vh;
-  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-              url("/imagenes/banner3.jpg");
+  background: url("/imagenes/banner1.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: center top;
   display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 40px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  color: rgb(255, 255, 255);
+  gap: 20px;
+  width: 100%;
+  padding: 20px;
 }
 
-.hero-content h1 {
-  font-size: 48px;
-  letter-spacing: 3px;
-  margin-bottom: 20px;
-}
-
-.hero-content p {
-  font-size: 18px;
-  margin-bottom: 30px;
-  opacity: 0.9;
+.hero-content img {
+  max-width: 420px;
+  width: 80%;
+  object-fit: contain;
 }
 
 .hero-btn {
   background-color: rgb(43, 24, 1);
-  color: rgb(255, 255, 255);
-  padding: 12px 30px;
+  color: white;
+  padding: 14px 36px;
   text-decoration: none;
   font-weight: bold;
+  font-size: 16px;
+  border-radius: 6px;
+  letter-spacing: 1px;
   transition: 0.3s;
-
-  margin-top: 400px; /* baja el botón */
   display: inline-block;
+  margin-top: 0;
 }
 
 .hero-btn:hover {
   background-color: #ddd;
+  color: #111;
 }
 
 /* ===== SECCIONES ===== */
@@ -84,8 +89,23 @@
 /* ===== RESPONSIVE ===== */
 
 @media (max-width: 768px) {
-  .hero-content h1 {
-    font-size: 30px;
+  .hero {
+    height: 60vh;
+  }
+
+  .hero-content img {
+    max-width: 260px;
+    width: 70%;
+  }
+
+  .hero-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+
+  .featured,
+  .all-products {
+    padding: 40px 16px;
   }
 
   .benefits {

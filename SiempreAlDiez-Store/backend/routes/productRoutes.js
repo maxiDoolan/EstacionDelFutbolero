@@ -16,12 +16,12 @@ router.get("/", async (req, res) => {
 
     let filter = {}
 
-    // 🔥 Si NO es admin → solo activos
+    // Si NO es admin → solo activos
     if (all !== "true") {
       filter.isActive = true
     }
 
-    // 🔥 FILTRO POR CATEGORÍA
+    // FILTRO POR CATEGORÍA
     if (category) {
       filter.category = new RegExp(`^${category}$`, "i")
     }
@@ -72,12 +72,12 @@ router.post(
   async (req, res) => {
     try {
 
-      // 🔥 PARSEAR STOCK (CLAVE)
+      // PARSEAR STOCK
       if (req.body.stock) {
         req.body.stock = JSON.parse(req.body.stock)
       }
 
-      const { name, description, price, category, stock } = req.body
+      const { name, description, price, category, stock, featured } = req.body
 
       if (!name || !price) {
         return res.status(400).json({
@@ -103,8 +103,9 @@ router.post(
         price,
         category,
         image: imageUrl,
-        stock: stock || {}, // 🔥 YA VIENE ARMADO
-        isActive: true
+        stock: stock || {},
+        isActive: true,
+        featured: featured === "true"
       })
 
       const savedProduct = await newProduct.save()
@@ -131,22 +132,23 @@ router.put(
 
     try {
 
-      // 🔥 PARSEAR STOCK (CLAVE)
+      // PARSEAR STOCK
       if (req.body.stock) {
         req.body.stock = JSON.parse(req.body.stock)
       }
 
-      const { name, description, price, category, stock } = req.body
+      const { name, description, price, category, stock, featured } = req.body
 
       let updateData = {
         name,
         description,
         price,
         category,
-        stock // 🔥 YA VIENE BIEN ARMADO
+        stock,
+        featured: featured === "true"
       }
 
-      // 🖼️ Si suben nueva imagen
+      // Si suben nueva imagen
       if (req.file) {
         const base64Image = `data:${req.file.mimetype};base64,${req.file.buffer.toString("base64")}`
 
@@ -183,9 +185,8 @@ router.put(
 )
 
 // ==============================
-// DELETE lógico (ADMIN)
+// DELETE real (ADMIN)
 // ==============================
-// DELETE REAL (ADMIN)
 router.delete("/:id", protect, adminOnly, async (req, res) => {
   try {
 
@@ -202,4 +203,5 @@ router.delete("/:id", protect, adminOnly, async (req, res) => {
     res.status(500).json({ message: "Error al eliminar producto" })
   }
 })
+
 export default router

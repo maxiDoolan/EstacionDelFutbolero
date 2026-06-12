@@ -12,7 +12,8 @@ const AdminPanel = () => {
     stockM: "",
     stockL: "",
     stockXL: "",
-    stockXXL: ""
+    stockXXL: "",
+    featured: false
   })
 
   const [imageFile, setImageFile] = useState(null)
@@ -20,7 +21,7 @@ const AdminPanel = () => {
   const [products, setProducts] = useState([])
   const [editingProduct, setEditingProduct] = useState(null)
 
-  const API = "http://localhost:5000/api/products"
+  const API = "/api/products"
 
   // =========================
   // OBTENER PRODUCTOS
@@ -65,7 +66,8 @@ const AdminPanel = () => {
       stockM: "",
       stockL: "",
       stockXL: "",
-      stockXXL: ""
+      stockXXL: "",
+      featured: false
     })
 
     setImageFile(null)
@@ -88,6 +90,7 @@ const AdminPanel = () => {
       formDataToSend.append("price", formData.price)
       formDataToSend.append("description", formData.description)
       formDataToSend.append("category", formData.category)
+      formDataToSend.append("featured", formData.featured)
 
       // 🔥 STOCK BIEN ARMADO
       const stock = {
@@ -154,13 +157,12 @@ const AdminPanel = () => {
       price: product.price,
       description: product.description,
       category: product.category || "",
-
-      // 🔥 CARGA STOCK EN EL FORM
       stockS: product.stock?.S || 0,
       stockM: product.stock?.M || 0,
       stockL: product.stock?.L || 0,
       stockXL: product.stock?.XL || 0,
-      stockXXL: product.stock?.XXL || 0
+      stockXXL: product.stock?.XXL || 0,
+      featured: product.featured || false
     })
   }
 
@@ -246,6 +248,16 @@ const AdminPanel = () => {
           required
         />
 
+        {/* ⭐ DESTACADO */}
+        <label className="featured-label">
+          <input
+            type="checkbox"
+            checked={formData.featured}
+            onChange={(e) => setFormData({ ...formData, featured: e.target.checked })}
+          />
+          ⭐ Producto destacado
+        </label>
+
         <input
           type="file"
           accept="image/*"
@@ -291,6 +303,7 @@ const AdminPanel = () => {
             <div>
               <h4>{product.name}</h4>
               <p>${product.price}</p>
+              {product.featured && <span>⭐ Destacado</span>}
             </div>
 
             <div className="admin-actions">

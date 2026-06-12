@@ -35,6 +35,11 @@ const productSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
+  },
+
+  featured: {
+    type: Boolean,
+    default: false
   }
 
 }, {

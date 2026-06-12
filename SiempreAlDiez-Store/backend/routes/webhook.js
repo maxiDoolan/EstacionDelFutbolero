@@ -32,11 +32,12 @@ router.post("/", async (req, res) => {
       return res.sendStatus(200)
     }
 
-    // 🔥 Descontar stock
+    // 🔥 Descontar stock por talle
     for (const item of order.items) {
+      const sizeKey = `stock.${item.size}`
       await Product.findOneAndUpdate(
-        { _id: item.productId, stock: { $gte: item.quantity } },
-        { $inc: { stock: -item.quantity } }
+        { _id: item.productId, [sizeKey]: { $gte: item.quantity } },
+        { $inc: { [sizeKey]: -item.quantity } }
       )
     }
 

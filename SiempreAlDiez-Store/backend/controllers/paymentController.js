@@ -19,16 +19,16 @@ export const createOrder = async (req, res) => {
           unit_price: Number(item.price)
         })),
 
-        external_reference: orderId, // 🔥 AHORA SÍ FUNCIONA
+        external_reference: orderId,
 
-              back_urls: {
-        success: "https://epistemic-shakita-jovial.ngrok-free.dev/success",
-        failure: "https://epistemic-shakita-jovial.ngrok-free.dev/failure",
-        pending: "https://epistemic-shakita-jovial.ngrok-free.dev/pending"
-      },
-      auto_return: "approved",
+        back_urls: {
+          success: `${process.env.FRONTEND_URL}/success`,
+          failure: `${process.env.FRONTEND_URL}/failure`,
+          pending: `${process.env.FRONTEND_URL}/pending`
+        },
+        auto_return: "approved",
 
-      notification_url: "https://epistemic-shakita-jovial.ngrok-free.dev/api/webhook"
+        notification_url: `${process.env.BACKEND_URL}/api/webhook`
 
         
       }

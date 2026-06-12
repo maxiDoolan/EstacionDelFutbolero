@@ -9,8 +9,8 @@ function Footer() {
       </div>
 
       <div className="footer-contact">
-        <p>📱 Contacto: 1134765561</p>
-        <p>✉️ Email: EstacionDelFutbolero@gmail.com</p>
+        <p>📱 Contacto: 11 3476-5561</p>
+        <p>✉️ Email: estaciondelfutbolero@gmail.com</p>
       </div>
 
       <div className="footer-social">
@@ -26,4 +26,4 @@ function Footer() {
   )
 }
 
-export default Footer
+export default Footer 

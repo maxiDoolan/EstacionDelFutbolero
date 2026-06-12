@@ -10,7 +10,7 @@ const Home = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch("/api/products");
         const data = await response.json();
         setProducts(data);
         setLoading(false);
@@ -23,7 +23,7 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  const destacados = products.slice(0, 3);
+  const destacados = products.filter(p => p.featured === true);
   if (loading) return <h2>Cargando productos...</h2>;
 
   
@@ -33,13 +33,13 @@ const Home = () => {
 
       {/* HERO PRINCIPAL */}
       <section className="hero">
-        <div className="hero-content">
-    
-          <Link to="/productos" className="hero-btn">
-            VER COLECCIÓN
-          </Link>
-        </div>
-      </section>
+  <div className="hero-content">
+   {/*  <img src="/imagenes/banner3.jpg" alt="Estación del Futbolero" /> */}
+    <Link to="/productos" className="hero-btn">
+      VER COLECCIÓN
+    </Link>
+  </div>
+</section>
 
       {/* PRODUCTOS DESTACADOS */}
       <section className="featured">
