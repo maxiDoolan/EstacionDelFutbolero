@@ -14,7 +14,7 @@ html, body {
 body {
   margin: 0;
   padding: 0;
-  background-image: url('/imagenes/fondo-estadio.jpg');
+  background-image: url('/imagenes/fondo-estadio.avif');
   background-size: cover;
   background-position: center center;
   background-attachment: fixed;
