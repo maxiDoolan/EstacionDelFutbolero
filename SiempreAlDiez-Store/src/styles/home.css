@@ -90,9 +90,8 @@
 
 @media (max-width: 768px) {
     .hero {
-          height: 40vh;
-          background-size: cover;
-          background-position: center center;
+        height: 50vh;
+        background: linear-gradient(135deg, #0a2a0a 0%, #1a5c1a 50%, #0d1f0d 100%);
     }
 
   .hero-content img {
