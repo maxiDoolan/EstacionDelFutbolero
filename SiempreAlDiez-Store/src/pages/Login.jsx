@@ -41,14 +41,12 @@ const Login = () => {
       localStorage.setItem("token", data.token)
       localStorage.setItem("isAdmin", data.isAdmin)
 
-    
-
-      // Si es admin → panel
-         if (data.isAdmin) {
-         navigate("/admin")
-        } else {
-          navigate("/")
-        }
+      // Si es admin → panel (window.location para forzar reload y re-leer localStorage)
+      if (data.isAdmin) {
+        window.location.href = "/admin"
+      } else {
+        window.location.href = "/"
+      }
 
     } catch (error) {
       alert("Error al iniciar sesión")
