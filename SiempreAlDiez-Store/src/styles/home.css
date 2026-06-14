@@ -91,10 +91,8 @@
 @media (max-width: 768px) {
     .hero {
           height: 40vh;
-          background-size: 100% auto;
+          background-size: cover;
           background-position: center center;
-          background-repeat: no-repeat;
-          background-color: #1a1a1a;
     }
 
   .hero-content img {
