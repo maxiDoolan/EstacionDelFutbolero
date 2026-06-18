@@ -30,18 +30,28 @@ const ProductDetail = () => {
     fetchProduct()
   }, [id])
 
+  // Talles para camisetas
+  const TALLES_CAMISETA = ["S", "M", "L", "XL", "XXL"]
+  // Colores para medias
+  const COLORES_MEDIA = ["Negro", "Blanco"]
+
+  const isMedia = product?.tipo === "media"
+
+  const opciones = isMedia ? COLORES_MEDIA : TALLES_CAMISETA
+
   const sinStockTotal =
     product?.stock &&
-    Object.values(product.stock).every(qty => qty === 0)
+    opciones.every(op => (product.stock[op] || 0) === 0)
 
   const handleAddToCart = () => {
     if (sinStockTotal) return
     if (!selectedSize) {
-      alert("Seleccioná un talle")
+      alert(isMedia ? "Seleccioná un color" : "Seleccioná un talle")
       return
     }
     addToCart({ ...product, size: selectedSize })
-    alert(`Agregado talle ${selectedSize} 🛒`)
+    const label = isMedia ? `color ${selectedSize}` : `talle ${selectedSize}`
+    alert(`Agregado ${label} 🛒`)
   }
 
   if (loading) return (
@@ -64,6 +74,10 @@ const ProductDetail = () => {
         <div className="detail-info">
           <h2>{product.name}</h2>
 
+          {isMedia && (
+            <p className="talle-unico-tag">🧦 Talle único</p>
+          )}
+
           <p className="detail-description">{product.description}</p>
 
           <h3 className="detail-price">${product.price.toLocaleString()}</h3>
@@ -74,21 +88,18 @@ const ProductDetail = () => {
 
           {!sinStockTotal && (
             <div className="size-selector">
-              <p>Seleccionar talle:</p>
+              <p>{isMedia ? "Seleccionar color:" : "Seleccionar talle:"}</p>
               <div className="sizes-container">
-                {(product.stock
-                  ? Object.keys(product.stock)
-                  : ["S", "M", "L", "XL", "XXL"]
-                ).map(size => {
-                  const isDisabled = product.stock && product.stock[size] === 0
+                {opciones.map(op => {
+                  const isDisabled = (product.stock?.[op] || 0) === 0
                   return (
                     <button
-                      key={size}
-                      className={`size-btn ${selectedSize === size ? "active" : ""}`}
+                      key={op}
+                      className={`size-btn ${selectedSize === op ? "active" : ""} ${isMedia ? `color-btn color-btn-${op.toLowerCase()}` : ""}`}
                       disabled={isDisabled}
-                      onClick={() => setSelectedSize(size)}
+                      onClick={() => setSelectedSize(op)}
                     >
-                      {size}
+                      {op}
                     </button>
                   )
                 })}

@@ -23,13 +23,21 @@ const productSchema = new mongoose.Schema({
     type: String
   },
 
-  // 🔥 STOCK POR TALLE
+  // Stock por talle (camisetas) o por color (medias)
   stock: {
     S: { type: Number, default: 0 },
     M: { type: Number, default: 0 },
     L: { type: Number, default: 0 },
     XL: { type: Number, default: 0 },
-    XXL: { type: Number, default: 0 }
+    XXL: { type: Number, default: 0 },
+    Negro: { type: Number, default: 0 },
+    Blanco: { type: Number, default: 0 }
+  },
+
+  tipo: {
+    type: String,
+    enum: ["camiseta", "media"],
+    default: "camiseta"
   },
 
   isActive: {

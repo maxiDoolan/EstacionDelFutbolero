@@ -96,6 +96,7 @@
   gap: 15px;
 }
 
+.admin-form select,
 .admin-form input,
 .admin-form textarea {
   padding: 12px;
@@ -111,6 +112,7 @@
   height: 100px;
 }
 
+.admin-form select:focus,
 .admin-form input:focus,
 .admin-form textarea:focus {
   outline: none;
@@ -171,6 +173,49 @@ border-radius:4px;
 
 .admin-actions button:hover{
 background:#b8894c;
+}
+
+/* ============================= */
+/* TIPO SELECTOR / STOCK GRID */
+/* ============================= */
+
+.tipo-select {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.stock-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.stock-grid input {
+  flex: 1;
+  min-width: 70px;
+}
+
+.featured-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.featured-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+
+.cancel-btn {
+  background: #555 !important;
+  color: white !important;
+}
+
+.cancel-btn:hover {
+  background: #777 !important;
 }
 /* ============================= */
 /* RESPONSIVE */

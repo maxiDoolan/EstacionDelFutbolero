@@ -78,7 +78,7 @@ router.post(
         req.body.stock = JSON.parse(req.body.stock)
       }
 
-      const { name, description, price, category, stock, featured } = req.body
+      const { name, description, price, category, stock, featured, tipo } = req.body
 
       if (!name || !price) {
         return res.status(400).json({
@@ -106,7 +106,8 @@ router.post(
         image: imageUrl,
         stock: stock || {},
         isActive: true,
-        featured: featured === "true"
+        featured: featured === "true",
+        tipo: tipo || "camiseta"
       })
 
       const savedProduct = await newProduct.save()
@@ -138,7 +139,7 @@ router.put(
         req.body.stock = JSON.parse(req.body.stock)
       }
 
-      const { name, description, price, category, stock, featured } = req.body
+      const { name, description, price, category, stock, featured, tipo } = req.body
 
       let updateData = {
         name,
@@ -146,7 +147,8 @@ router.put(
         price,
         category,
         stock,
-        featured: featured === "true"
+        featured: featured === "true",
+        tipo: tipo || "camiseta"
       }
 
       // Si suben nueva imagen

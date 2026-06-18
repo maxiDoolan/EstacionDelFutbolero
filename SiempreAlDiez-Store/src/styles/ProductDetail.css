@@ -205,6 +205,52 @@
   transform: none;
 }
 
+/* 🧦 TALLE ÚNICO TAG */
+.talle-unico-tag {
+  display: inline-block;
+  background: rgba(255,255,255,0.12);
+  color: #ccc;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+}
+
+/* 🎨 BOTONES DE COLOR (medias) */
+.color-btn {
+  min-width: 80px;
+}
+
+.color-btn-negro {
+  background: #1a1a1a !important;
+  border-color: #555 !important;
+  color: #fff !important;
+}
+
+.color-btn-negro.active {
+  border-color: #4caf50 !important;
+  outline: 2px solid #4caf50;
+}
+
+.color-btn-negro:hover:not(:disabled) {
+  border-color: #4caf50 !important;
+}
+
+.color-btn-blanco {
+  background: #f0f0f0 !important;
+  border-color: #ccc !important;
+  color: #111 !important;
+}
+
+.color-btn-blanco.active {
+  border-color: #4caf50 !important;
+  outline: 2px solid #4caf50;
+}
+
+.color-btn-blanco:hover:not(:disabled) {
+  border-color: #4caf50 !important;
+}
+
 /* 🔥 RESPONSIVE MOBILE */
 @media (max-width: 650px) {
   .detail-container {

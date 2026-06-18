@@ -8,11 +8,14 @@ const AdminPanel = () => {
     price: "",
     description: "",
     category: "",
+    tipo: "camiseta",
     stockS: "",
     stockM: "",
     stockL: "",
     stockXL: "",
     stockXXL: "",
+    stockNegro: "",
+    stockBlanco: "",
     featured: false
   })
 
@@ -22,10 +25,6 @@ const AdminPanel = () => {
   const [editingProduct, setEditingProduct] = useState(null)
 
   const API = "/api/products"
-
-  // =========================
-  // OBTENER PRODUCTOS
-  // =========================
 
   const fetchProducts = async () => {
     try {
@@ -41,20 +40,9 @@ const AdminPanel = () => {
     fetchProducts()
   }, [])
 
-  // =========================
-  // FORM CHANGE
-  // =========================
-
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value
-    })
+    setFormData({ ...formData, [e.target.name]: e.target.value })
   }
-
-  // =========================
-  // LIMPIAR FORM
-  // =========================
 
   const resetForm = () => {
     setFormData({
@@ -62,43 +50,48 @@ const AdminPanel = () => {
       price: "",
       description: "",
       category: "",
+      tipo: "camiseta",
       stockS: "",
       stockM: "",
       stockL: "",
       stockXL: "",
       stockXXL: "",
+      stockNegro: "",
+      stockBlanco: "",
       featured: false
     })
-
     setImageFile(null)
     setEditingProduct(null)
   }
 
-  // =========================
-  // CREAR / EDITAR PRODUCTO
-  // =========================
-
   const handleSubmit = async (e) => {
     e.preventDefault()
-
     try {
       setLoading(true)
 
       const formDataToSend = new FormData()
-
       formDataToSend.append("name", formData.name)
       formDataToSend.append("price", formData.price)
       formDataToSend.append("description", formData.description)
       formDataToSend.append("category", formData.category)
       formDataToSend.append("featured", formData.featured)
+      formDataToSend.append("tipo", formData.tipo)
 
-      // 🔥 STOCK BIEN ARMADO
-      const stock = {
-        S: Number(formData.stockS) || 0,
-        M: Number(formData.stockM) || 0,
-        L: Number(formData.stockL) || 0,
-        XL: Number(formData.stockXL) || 0,
-        XXL: Number(formData.stockXXL) || 0
+      // Stock según tipo
+      let stock
+      if (formData.tipo === "media") {
+        stock = {
+          Negro: Number(formData.stockNegro) || 0,
+          Blanco: Number(formData.stockBlanco) || 0
+        }
+      } else {
+        stock = {
+          S: Number(formData.stockS) || 0,
+          M: Number(formData.stockM) || 0,
+          L: Number(formData.stockL) || 0,
+          XL: Number(formData.stockXL) || 0,
+          XXL: Number(formData.stockXXL) || 0
+        }
       }
 
       formDataToSend.append("stock", JSON.stringify(stock))
@@ -107,19 +100,12 @@ const AdminPanel = () => {
         formDataToSend.append("image", imageFile)
       }
 
-      let url = API
-      let method = "POST"
-
-      if (editingProduct) {
-        url = `${API}/${editingProduct._id}`
-        method = "PUT"
-      }
+      const url = editingProduct ? `${API}/${editingProduct._id}` : API
+      const method = editingProduct ? "PUT" : "POST"
 
       const res = await fetch(url, {
         method,
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
         body: formDataToSend
       })
 
@@ -132,7 +118,6 @@ const AdminPanel = () => {
       }
 
       alert(editingProduct ? "Producto actualizado" : "Producto creado")
-
       resetForm()
       fetchProducts()
       setLoading(false)
@@ -144,55 +129,36 @@ const AdminPanel = () => {
     }
   }
 
-  // =========================
-  // EDITAR PRODUCTO
-  // =========================
-
   const handleEdit = (product) => {
-
     setEditingProduct(product)
-
     setFormData({
       name: product.name,
       price: product.price,
       description: product.description,
       category: product.category || "",
+      tipo: product.tipo || "camiseta",
       stockS: product.stock?.S || 0,
       stockM: product.stock?.M || 0,
       stockL: product.stock?.L || 0,
       stockXL: product.stock?.XL || 0,
       stockXXL: product.stock?.XXL || 0,
+      stockNegro: product.stock?.Negro || 0,
+      stockBlanco: product.stock?.Blanco || 0,
       featured: product.featured || false
     })
   }
 
-  // =========================
-  // ELIMINAR PRODUCTO
-  // =========================
-
   const deleteProduct = async (id) => {
-
-    const confirmDelete = window.confirm("¿Eliminar producto?")
-    if (!confirmDelete) return
-
+    if (!window.confirm("¿Eliminar producto?")) return
     try {
       const res = await fetch(`${API}/${id}`, {
         method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`
-        }
+        headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
       })
-
       const data = await res.json()
-
-      if (!res.ok) {
-        alert(data.message)
-        return
-      }
-
+      if (!res.ok) { alert(data.message); return }
       setProducts(products.filter(p => p._id !== id))
       alert("Producto eliminado")
-
     } catch (error) {
       console.error(error)
     }
@@ -203,52 +169,36 @@ const AdminPanel = () => {
 
       <h2>Panel de Administrador</h2>
 
-      {/* ================= FORM ================= */}
-
       <form className="admin-form" onSubmit={handleSubmit}>
 
-        <input
-          name="name"
-          placeholder="Nombre del producto"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
+        <input name="name" placeholder="Nombre del producto" value={formData.name} onChange={handleChange} required />
+        <input name="price" placeholder="Precio" type="number" value={formData.price} onChange={handleChange} required />
+        <input name="category" placeholder="Categoría" value={formData.category} onChange={handleChange} />
 
-        <input
-          name="price"
-          placeholder="Precio"
-          type="number"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
+        {/* TIPO DE PRODUCTO */}
+        <select name="tipo" value={formData.tipo} onChange={handleChange} className="tipo-select">
+          <option value="camiseta">👕 Camiseta / Ropa</option>
+          <option value="media">🧦 Media (talle único)</option>
+        </select>
 
-        <input
-          name="category"
-          placeholder="Categoría"
-          value={formData.category}
-          onChange={handleChange}
-        />
+        {/* STOCK SEGÚN TIPO */}
+        {formData.tipo === "camiseta" ? (
+          <div className="stock-grid">
+            <input name="stockS" placeholder="S" type="number" value={formData.stockS} onChange={handleChange} />
+            <input name="stockM" placeholder="M" type="number" value={formData.stockM} onChange={handleChange} />
+            <input name="stockL" placeholder="L" type="number" value={formData.stockL} onChange={handleChange} />
+            <input name="stockXL" placeholder="XL" type="number" value={formData.stockXL} onChange={handleChange} />
+            <input name="stockXXL" placeholder="XXL" type="number" value={formData.stockXXL} onChange={handleChange} />
+          </div>
+        ) : (
+          <div className="stock-grid">
+            <input name="stockNegro" placeholder="Stock Negro" type="number" value={formData.stockNegro} onChange={handleChange} />
+            <input name="stockBlanco" placeholder="Stock Blanco" type="number" value={formData.stockBlanco} onChange={handleChange} />
+          </div>
+        )}
 
-        {/* 🔥 STOCK */}
-        <div className="stock-grid">
-          <input name="stockS" placeholder="S" type="number" value={formData.stockS} onChange={handleChange} />
-          <input name="stockM" placeholder="M" type="number" value={formData.stockM} onChange={handleChange} />
-          <input name="stockL" placeholder="L" type="number" value={formData.stockL} onChange={handleChange} />
-          <input name="stockXL" placeholder="XL" type="number" value={formData.stockXL} onChange={handleChange} />
-          <input name="stockXXL" placeholder="XXL" type="number" value={formData.stockXXL} onChange={handleChange} />
-        </div>
+        <textarea name="description" placeholder="Descripción" value={formData.description} onChange={handleChange} required />
 
-        <textarea
-          name="description"
-          placeholder="Descripción"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-
-        {/* ⭐ DESTACADO */}
         <label className="featured-label">
           <input
             type="checkbox"
@@ -258,68 +208,39 @@ const AdminPanel = () => {
           ⭐ Producto destacado
         </label>
 
-        <input
-          type="file"
-          accept="image/*"
-          onChange={(e) => setImageFile(e.target.files[0])}
-        />
+        <input type="file" accept="image/*" onChange={(e) => setImageFile(e.target.files[0])} />
 
         <button type="submit" disabled={loading}>
-          {loading
-            ? "Guardando..."
-            : editingProduct
-              ? "Actualizar producto"
-              : "Crear producto"}
+          {loading ? "Guardando..." : editingProduct ? "Actualizar producto" : "Crear producto"}
         </button>
 
         {editingProduct && (
-          <button
-            type="button"
-            onClick={resetForm}
-            className="cancel-btn"
-          >
+          <button type="button" onClick={resetForm} className="cancel-btn">
             Cancelar edición
           </button>
         )}
 
       </form>
 
-      {/* ================= PRODUCTOS ================= */}
-
+      {/* LISTA DE PRODUCTOS */}
       <div className="admin-products">
-
         <h3>Productos</h3>
-
         {products.length === 0 && <p>No hay productos</p>}
-
         {products.map((product) => (
-
           <div key={product._id} className="admin-product">
-
-            {product.image && (
-              <img src={product.image} alt={product.name} />
-            )}
-
+            {product.image && <img src={product.image} alt={product.name} />}
             <div>
               <h4>{product.name}</h4>
               <p>${product.price}</p>
+              {product.tipo === "media" && <span>🧦 Media</span>}
               {product.featured && <span>⭐ Destacado</span>}
             </div>
-
             <div className="admin-actions">
-              <button onClick={() => handleEdit(product)}>
-                Editar
-              </button>
-
-              <button onClick={() => deleteProduct(product._id)}>
-                Eliminar
-              </button>
+              <button onClick={() => handleEdit(product)}>Editar</button>
+              <button onClick={() => deleteProduct(product._id)}>Eliminar</button>
             </div>
-
           </div>
-
         ))}
-
       </div>
 
     </div>
