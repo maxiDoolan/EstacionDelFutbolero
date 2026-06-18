@@ -23,7 +23,8 @@ router.get("/", async (req, res) => {
 
     // FILTRO POR CATEGORÍA
     if (category) {
-      filter.category = new RegExp(`^${category}$`, "i")
+      const escapedCategory = category.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+      filter.category = new RegExp(`^${escapedCategory}$`, "i")
     }
 
     const products = await Product
