@@ -29,6 +29,16 @@ const Checkout = () => {
   }
 
 const handleCheckout = async () => {
+  const { name, email, phone, province, city, address, postalCode } = formData
+  if (!name || !email || !phone || !province || !city || !address || !postalCode) {
+    alert("Por favor completá todos los campos antes de continuar")
+    return
+  }
+  if (cart.length === 0) {
+    alert("Tu carrito está vacío")
+    return
+  }
+
   try {
 
     const orderData = {
@@ -66,7 +76,7 @@ const handleCheckout = async () => {
     window.location.href = `https://www.mercadopago.com.ar/checkout/v1/redirect?pref_id=${payment.id}`
 
   } catch (error) {
-    console.log(error)
+    console.error("Error en checkout:", error)
     alert("Error al procesar el pago")
   }
 }

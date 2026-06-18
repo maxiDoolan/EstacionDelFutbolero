@@ -22,7 +22,7 @@ router.post("/", async (req, res) => {
     res.status(201).json(newOrder)
 
   } catch (error) {
-    console.log(error)
+    console.error("Error creando pedido:", error)
     res.status(500).json({ message: "Error creando pedido" })
   }
 })

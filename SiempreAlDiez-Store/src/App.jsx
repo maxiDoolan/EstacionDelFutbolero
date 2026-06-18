@@ -8,6 +8,7 @@ import Cart from "./pages/cart.jsx"
 import Checkout from "./pages/CheckOut.jsx"
 import Productos from "./pages/Productos"
 import Success from "./pages/Success"
+import Failure from "./pages/Failure"
 
 import Navbar from "./components/NavBar"
 import Footer from "./components/Footer"
@@ -35,6 +36,8 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/login" element={<Login />} />
           <Route path="/success" element={<Success />} />
+          <Route path="/failure" element={<Failure />} />
+          <Route path="/pending" element={<Failure />} />
 
           {/* Protegida */}
           <Route
