@@ -5,7 +5,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-top">
         <p>🚚 Envío gratis CABA</p>
-        <p>💳 Pagá como quieras </p>
+        
       </div>
 
       <div className="footer-contact">

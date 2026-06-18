@@ -64,8 +64,8 @@ const Home = () => {
       {/* BENEFICIOS */}
       <section className="benefits">
         <div>🚚 Envío gratis +$55.000</div>
-        <div>💳 Pagá como quieras</div>
-        <div>📦 Cambios fáciles</div>
+        <div>💳 Pago seguro con Mercado Pago</div>
+        <div>📦 Cambios Garantizados</div>
       </section>
 
     </div>
