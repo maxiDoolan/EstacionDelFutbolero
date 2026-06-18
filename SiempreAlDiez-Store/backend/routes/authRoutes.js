@@ -1,12 +1,20 @@
 import express from "express"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import rateLimit from "express-rate-limit"
 import User from "../models/User.js"
 
 const router = express.Router()
 
+// 🛡️ Rate limiting: máx 10 intentos cada 15 min por IP
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 10,
+  message: { message: "Demasiados intentos, esperá 15 minutos e intentá de nuevo" }
+})
+
 // 🔐 LOGIN
-router.post("/login", async (req, res) => {
+router.post("/login", loginLimiter, async (req, res) => {
   try {
     const { email, password } = req.body
 
@@ -17,14 +25,15 @@ router.post("/login", async (req, res) => {
 
     const user = await User.findOne({ email })
 
+    // Mensaje genérico para no revelar si el email existe
     if (!user) {
-      return res.status(401).json({ message: "Usuario no encontrado" })
+      return res.status(401).json({ message: "Credenciales inválidas" })
     }
 
     const isMatch = await bcrypt.compare(password, user.password)
 
     if (!isMatch) {
-      return res.status(401).json({ message: "Password incorrecta" })
+      return res.status(401).json({ message: "Credenciales inválidas" })
     }
 
     // Verificar que exista JWT_SECRET
