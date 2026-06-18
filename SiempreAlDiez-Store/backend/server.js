@@ -18,7 +18,12 @@ const __dirname = path.dirname(__filename)
 
 const app = express()
 
-app.use(cors())
+app.use(cors({
+  origin: [
+    "https://estaciondelfutbolero-production.up.railway.app",
+    "http://localhost:5173"
+  ]
+}))
 app.use(express.json())
 
 connectDB()
@@ -34,7 +39,7 @@ app.use("/api/webhook", webhookRoutes)
 app.use(express.static(path.join(__dirname, "../dist")))
 
 // Catch-all para React Router
-app.get("/{*path}", (req, res) => {
+app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist/index.html"))
 })
 
