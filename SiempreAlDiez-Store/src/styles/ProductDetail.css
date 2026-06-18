@@ -3,6 +3,27 @@
   min-height: 100vh;
 }
 
+/* ===== LOADING ===== */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+}
+
+.spinner {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(255,255,255,0.2);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
 .detail-container {
   display: flex;
   gap: 40px;
@@ -19,6 +40,8 @@
 /* 🔥 IMAGEN */
 .detail-image {
   flex-shrink: 0;
+  cursor: zoom-in;
+  position: relative;
 }
 
 .detail-image img {
@@ -26,6 +49,56 @@
   border-radius: 12px;
   object-fit: cover;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s ease;
+}
+
+.detail-image:hover img {
+  transform: scale(1.02);
+}
+
+.zoom-hint {
+  text-align: center;
+  margin-top: 8px;
+  color: #aaa;
+  font-size: 13px;
+}
+
+/* ===== LIGHTBOX ===== */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  cursor: zoom-out;
+  animation: fadeIn 0.2s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 0 60px rgba(0,0,0,0.8);
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 28px;
+  cursor: pointer;
+  line-height: 1;
 }
 
 /* 🔥 INFO */

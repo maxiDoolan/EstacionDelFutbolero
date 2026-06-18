@@ -24,38 +24,44 @@ const Home = () => {
   }, []);
 
   const destacados = products.filter(p => p.featured === true);
-  if (loading) return <h2>Cargando productos...</h2>;
+  const resto = products.filter(p => p.featured !== true);
 
-  
+  if (loading) return (
+    <div className="loading-container">
+      <div className="spinner"></div>
+      <p>Cargando productos...</p>
+    </div>
+  );
 
   return (
     <div className="home">
 
       {/* HERO PRINCIPAL */}
       <section className="hero">
-  <div className="hero-content">
-   {/*  <img src="/imagenes/banner3.jpg" alt="Estación del Futbolero" /> */}
-    <Link to="/productos" className="hero-btn">
-      VER COLECCIÓN
-    </Link>
-  </div>
-</section>
-
-      {/* PRODUCTOS DESTACADOS */}
-      <section className="featured">
-        <h2>Destacados</h2>
-        <div className="products-grid">
-          {destacados.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
+        <div className="hero-content">
+          <Link to="/productos" className="hero-btn">
+            VER COLECCIÓN
+          </Link>
         </div>
       </section>
 
-      {/* TODOS LOS PRODUCTOS */}
+      {/* PRODUCTOS DESTACADOS */}
+      {destacados.length > 0 && (
+        <section className="featured">
+          <h2>Destacados</h2>
+          <div className="products-grid">
+            {destacados.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* TODOS LOS PRODUCTOS (sin los destacados) */}
       <section className="all-products">
         <h2>Nuestra Colección</h2>
         <div className="products-grid">
-          {products.map((product) => (
+          {resto.map((product) => (
             <ProductCard key={product._id} product={product} />
           ))}
         </div>
