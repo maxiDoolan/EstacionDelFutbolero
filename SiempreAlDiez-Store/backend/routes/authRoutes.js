@@ -1,12 +1,21 @@
 import express from "express"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
+import rateLimit from "express-rate-limit"
 import User from "../models/User.js"
 
 const router = express.Router()
 
+const loginLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 10,                   // máx 10 intentos
+  message: { message: "Demasiados intentos, esperá 15 minutos" },
+  standardHeaders: true,
+  legacyHeaders: false
+})
+
 // 🔐 LOGIN
-router.post("/login", async (req, res) => {
+router.post("/login", loginLimiter, async (req, res) => {
   try {
     const { email, password } = req.body
     if (!email || !password) {
@@ -14,11 +23,11 @@ router.post("/login", async (req, res) => {
     }
     const user = await User.findOne({ email })
     if (!user) {
-      return res.status(401).json({ message: "Usuario no encontrado" })
+      return res.status(401).json({ message: "Credenciales inválidas" })
     }
     const isMatch = await bcrypt.compare(password, user.password)
     if (!isMatch) {
-      return res.status(401).json({ message: "Password incorrecta" })
+      return res.status(401).json({ message: "Credenciales inválidas" })
     }
     if (!process.env.JWT_SECRET) {
       return res.status(500).json({ message: "JWT_SECRET no configurado" })
