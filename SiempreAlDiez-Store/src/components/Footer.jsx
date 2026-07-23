@@ -4,7 +4,7 @@ function Footer() {
   return (
     <footer className="footer">
       <div className="footer-top">
-        <p>🚚 Envío gratis CABA</p>
+        <p>🚚 Envíos rapidos si sos de CABA/ZONA OESTE</p>
         
       </div>
 
