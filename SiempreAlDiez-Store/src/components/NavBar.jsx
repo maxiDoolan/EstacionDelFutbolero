@@ -168,6 +168,12 @@ export default function Navbar() {
           </li>
 
           <li>
+            <Link to="/productos?sale=true" onClick={closeMenu} style={{ color: "#ff4d4d", fontWeight: 700 }}>
+              🔥 Liquidación
+            </Link>
+          </li>
+
+          <li>
             <Link to="/contacto" onClick={closeMenu}>
               Contacto
             </Link>

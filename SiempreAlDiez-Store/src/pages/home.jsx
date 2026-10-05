@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ProductCard from "../components/ProductCard";
 import "../styles/home.css";
+import { isOnSale } from "../utils/sale";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
@@ -23,8 +24,9 @@ const Home = () => {
     fetchProducts();
   }, []);
 
-  const destacados = products.filter(p => p.featured === true);
-  const resto = products.filter(p => p.featured !== true);
+  const liquidacion = products.filter(p => isOnSale(p));
+  const destacados = products.filter(p => p.featured === true && !isOnSale(p));
+  const resto = products.filter(p => p.featured !== true && !isOnSale(p));
 
   if (loading) return (
     <div className="loading-container">
@@ -44,6 +46,22 @@ const Home = () => {
           </Link>
         </div>
       </section>
+
+      {/* LIQUIDACIÓN */}
+      {liquidacion.length > 0 && (
+        <section className="featured sale-section">
+          <h2>🔥 Liquidación</h2>
+          <p className="sale-subtitle">Precios de renovación · Stock limitado</p>
+          <div className="products-grid">
+            {liquidacion.map((product) => (
+              <ProductCard key={product._id} product={product} />
+            ))}
+          </div>
+          <Link to="/productos?sale=true" className="sale-see-all">
+            Ver toda la liquidación
+          </Link>
+        </section>
+      )}
 
       {/* PRODUCTOS DESTACADOS */}
       {destacados.length > 0 && (

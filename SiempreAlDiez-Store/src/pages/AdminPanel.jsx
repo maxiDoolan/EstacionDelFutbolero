@@ -6,6 +6,7 @@ const AdminPanel = () => {
   const [formData, setFormData] = useState({
     name: "",
     price: "",
+    oldPrice: "",
     description: "",
     category: "",
     tipo: "camiseta",
@@ -48,6 +49,7 @@ const AdminPanel = () => {
     setFormData({
       name: "",
       price: "",
+      oldPrice: "",
       description: "",
       category: "",
       tipo: "camiseta",
@@ -72,6 +74,7 @@ const AdminPanel = () => {
       const formDataToSend = new FormData()
       formDataToSend.append("name", formData.name)
       formDataToSend.append("price", formData.price)
+      formDataToSend.append("oldPrice", formData.oldPrice || "")
       formDataToSend.append("description", formData.description)
       formDataToSend.append("category", formData.category)
       formDataToSend.append("featured", formData.featured)
@@ -134,6 +137,7 @@ const AdminPanel = () => {
     setFormData({
       name: product.name,
       price: product.price,
+      oldPrice: product.oldPrice || "",
       description: product.description,
       category: product.category || "",
       tipo: product.tipo || "camiseta",
@@ -173,6 +177,7 @@ const AdminPanel = () => {
 
         <input name="name" placeholder="Nombre del producto" value={formData.name} onChange={handleChange} required />
         <input name="price" placeholder="Precio" type="number" value={formData.price} onChange={handleChange} required />
+        <input name="oldPrice" placeholder="Precio anterior (tachado) — dejalo vacío si no está en liquidación" type="number" value={formData.oldPrice} onChange={handleChange} />
         <input name="category" placeholder="Categoría" value={formData.category} onChange={handleChange} />
 
         {/* TIPO DE PRODUCTO */}
@@ -231,7 +236,13 @@ const AdminPanel = () => {
             {product.image && <img src={product.image} alt={product.name} />}
             <div>
               <h4>{product.name}</h4>
-              <p>${product.price}</p>
+              <p>
+                {product.oldPrice > product.price && (
+                  <s style={{ color: "#999", marginRight: 6 }}>${product.oldPrice}</s>
+                )}
+                ${product.price}
+              </p>
+              {product.oldPrice > product.price && <span>🔥 Liquidación</span>}
               {product.tipo === "media" && <span>🧦 Media</span>}
               {product.featured && <span>⭐ Destacado</span>}
             </div>

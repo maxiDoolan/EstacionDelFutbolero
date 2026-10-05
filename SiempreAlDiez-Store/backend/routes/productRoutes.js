@@ -12,7 +12,7 @@ const router = express.Router()
 router.get("/", async (req, res) => {
   try {
 
-    const { all, category } = req.query
+    const { all, category, sale } = req.query
 
     let filter = {}
 
@@ -25,6 +25,11 @@ router.get("/", async (req, res) => {
     if (category) {
       const escapedCategory = category.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
       filter.category = new RegExp(`^${escapedCategory}$`, "i")
+    }
+
+    // FILTRO LIQUIDACIÓN: precio anterior mayor al actual
+    if (sale === "true") {
+      filter.$expr = { $gt: ["$oldPrice", "$price"] }
     }
 
     const products = await Product
@@ -79,6 +84,7 @@ router.post(
       }
 
       const { name, description, price, category, stock, featured, tipo } = req.body
+      const oldPrice = req.body.oldPrice ? Number(req.body.oldPrice) : null
 
       if (!name || !price) {
         return res.status(400).json({
@@ -102,6 +108,7 @@ router.post(
         name,
         description,
         price,
+        oldPrice,
         category,
         image: imageUrl,
         stock: stock || {},
@@ -140,11 +147,13 @@ router.put(
       }
 
       const { name, description, price, category, stock, featured, tipo } = req.body
+      const oldPrice = req.body.oldPrice ? Number(req.body.oldPrice) : null
 
       let updateData = {
         name,
         description,
         price,
+        oldPrice,
         category,
         stock,
         featured: featured === "true",

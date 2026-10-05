@@ -15,6 +15,12 @@ const productSchema = new mongoose.Schema({
     required: true
   },
 
+  // Precio anterior (tachado). Si es mayor que price, el producto está en liquidación
+  oldPrice: {
+    type: Number,
+    default: null
+  },
+
   category: {
     type: String
   },

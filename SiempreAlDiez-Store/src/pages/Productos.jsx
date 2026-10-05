@@ -38,6 +38,7 @@ export default function Productos() {
   // 🔥 SACAMOS useParams → ahora usamos query param
   const queryParams = new URLSearchParams(location.search)
   const categoria = queryParams.get("category")
+  const esLiquidacion = queryParams.get("sale") === "true"
 
   if (loading) return <h2>Cargando productos...</h2>
 
@@ -45,9 +46,11 @@ export default function Productos() {
     <div className="productos-container">
 
       <h2 className="productos-title">
-        {categoria
-          ? categoria.toUpperCase()
-          : "TODOS LOS PRODUCTOS"}
+        {esLiquidacion
+          ? "🔥 LIQUIDACIÓN"
+          : categoria
+            ? categoria.toUpperCase()
+            : "TODOS LOS PRODUCTOS"}
       </h2>
 
       <div className="productos-grid">

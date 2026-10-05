@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState, useContext } from "react"
 import { CartContext } from "../context/CartContext"
 import "../styles/ProductDetail.css"
+import { getDiscount } from "../utils/sale"
 
 const ProductDetail = () => {
 
@@ -36,6 +37,7 @@ const ProductDetail = () => {
   const COLORES_MEDIA = ["Negro", "Blanco"]
 
   const isMedia = product?.tipo === "media"
+  const discount = getDiscount(product)
 
   const opciones = isMedia ? COLORES_MEDIA : TALLES_CAMISETA
 
@@ -79,6 +81,13 @@ const ProductDetail = () => {
           )}
 
           <p className="detail-description">{product.description}</p>
+
+          {discount > 0 && (
+            <div className="detail-sale">
+              <span className="detail-sale-badge">SALE -{discount}%</span>
+              <span className="detail-old-price">${product.oldPrice.toLocaleString()}</span>
+            </div>
+          )}
 
           <h3 className="detail-price">${product.price.toLocaleString()}</h3>
 

@@ -271,3 +271,26 @@
     font-size: 24px;
   }
 }
+/* ===== LIQUIDACIÓN / SALE ===== */
+.detail-sale {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.detail-sale-badge {
+  background: #d62828;
+  color: white;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  padding: 5px 10px;
+  border-radius: 6px;
+}
+
+.detail-old-price {
+  font-size: 18px;
+  color: #999;
+  text-decoration: line-through;
+}
